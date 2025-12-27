@@ -2,14 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Redirecting...</title>
+  <title>redirecting...</title>
   <meta http-equiv="refresh" content="0; URL='https://www.youtube.com/@niczflicks'" />
+  <style>
+    /* global resets */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: -apple-system, system-ui, sans-serif;
+      text-transform: lowercase;
+      background: #fafafa;
+      color: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    body {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    a {
+      color: #111;
+      text-decoration: none;
+      font-weight: 500;
+      border: 2px solid #111;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    a:hover {
+      background: #111;
+      color: #fff;
+    }
+
+    p {
+      font-size: 1rem;
+      max-width: 300px;
+    }
+  </style>
   <script>
-    // fallback for browsers that ignore meta refresh
+    // fallback for browsers ignoring meta refresh
     window.location.href = "https://www.youtube.com/@niczflicks";
   </script>
 </head>
 <body>
-  <p>Redirecting to <a href="https://www.youtube.com/@niczflicks">YouTube channel</a>...</p>
+  <p>redirecting to <a href="https://www.youtube.com/@niczflicks">youtube channel</a>...</p>
 </body>
 </html>
