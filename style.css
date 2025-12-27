@@ -69,3 +69,110 @@ a:hover {
   padding-left: 1rem;
   border-left: 2px solid #e0e0e0;
 }
+
+/* Portfolio grid layout */
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Card styling */
+.project-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.project-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.project-card h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem 1rem 0;
+}
+
+.project-card p {
+  font-size: 0.95rem;
+  margin: 0.25rem 1rem 0.5rem;
+  color: #333;
+}
+
+.project-card .skills {
+  font-size: 0.85rem;
+  margin: 0 1rem 0.5rem;
+  color: #555;
+}
+
+.project-card a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+  margin: 0 1rem 1rem;
+}
+
+.project-card a:hover {
+  opacity: 0.7;
+}
+
+/* Footer spacing */
+footer {
+  margin-top: 4rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* Landing page styling */
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  gap: 2rem;
+}
+
+.landing-page h1 {
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+
+.landing-page p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.landing-links {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.landing-link {
+  padding: 1rem 2rem;
+  border: 2px solid #111;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  color: #111;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.landing-link:hover {
+  background: #111;
+  color: #fff;
+}
