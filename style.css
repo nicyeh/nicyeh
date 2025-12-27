@@ -176,3 +176,19 @@ footer {
   background: #111;
   color: #fff;
 }
+
+.portfolio-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.portfolio-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.portfolio-header p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
