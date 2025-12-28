@@ -19,7 +19,7 @@ form.addEventListener("submit", (e) => {
     .filter(val => val !== "");
 
   if (values.length !== 24) {
-    alert("Please fill in all 24 boxes.");
+    alert("please fill all of them!");
     return;
   }
 
@@ -31,27 +31,24 @@ function generateBoard(values) {
   boardSection.classList.remove("hidden");
 
   shuffle(values);
+  boardState = [];
 
-  let index = 0;
+  let valueIndex = 0;
 
   for (let i = 0; i < 25; i++) {
-    const cell = document.createElement("div");
-    cell.classList.add("cell");
+    let cellData;
 
     if (i === 12) {
-      cell.textContent = "FREE";
-      cell.classList.add("free");
+      cellData = { text: "FREE", marked: false };
     } else {
-      cell.textContent = values[index];
-      index++;
+      cellData = { text: values[valueIndex], marked: false };
+      valueIndex++;
     }
 
-    cell.addEventListener("click", () => {
-      cell.classList.toggle("marked");
-    });
-
-    grid.appendChild(cell);
+    boardState.push(cellData);
   }
+
+  renderBoard();
 }
 
 // Fisher–Yates shuffle
@@ -65,9 +62,71 @@ function shuffle(array) {
 const saveButton = document.getElementById("save-board");
 
 saveButton.addEventListener("click", async () => {
+  // First, download the PNG
   const canvas = await html2canvas(grid);
   const link = document.createElement("a");
   link.download = "bingo-board.png";
   link.href = canvas.toDataURL("image/png");
   link.click();
+
+  // Then, generate and navigate to the unique URL
+  const encoded = btoa(JSON.stringify(boardState));
+  const newUrl = `${window.location.origin}/bingo?board=${encoded}`;
+  window.location.href = newUrl;
 });
+
+function renderBoard() {
+  grid.innerHTML = "";
+
+  boardState.forEach((cellData, index) => {
+    const cell = document.createElement("div");
+    cell.classList.add("cell");
+
+    if (cellData.text === "FREE") {
+      cell.classList.add("free");
+    }
+
+    if (cellData.marked) {
+      cell.classList.add("marked");
+    }
+
+    cell.textContent = cellData.text;
+
+    cell.addEventListener("click", () => {
+      boardState[index].marked = !boardState[index].marked;
+      cell.classList.toggle("marked");
+      updateURL();
+    });
+
+    grid.appendChild(cell);
+  });
+}
+
+function updateURL() {
+  const encoded = btoa(JSON.stringify(boardState));
+  const url = `${window.location.pathname}?board=${encoded}`;
+  window.history.replaceState(null, "", url);
+}
+
+function loadBoardFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const data = params.get("board");
+
+  if (!data) return;
+
+  try {
+    boardState = JSON.parse(atob(data));
+    boardSection.classList.remove("hidden");
+    renderBoard();
+
+    // Hide the input fields if the board data is present
+    if (boardState && boardState.length === 25) {
+      const form = document.getElementById("bingo-form");
+      if (form) {
+        form.classList.add("hidden");
+      }
+    }
+  } catch (e) {
+    console.error("Invalid board data");
+  }
+}
