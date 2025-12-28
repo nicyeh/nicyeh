@@ -46,6 +46,10 @@ function generateBoard(values) {
       index++;
     }
 
+    cell.addEventListener("click", () => {
+      cell.classList.toggle("marked");
+    });
+
     grid.appendChild(cell);
   }
 }
@@ -57,3 +61,13 @@ function shuffle(array) {
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
+const saveButton = document.getElementById("save-board");
+
+saveButton.addEventListener("click", async () => {
+  const canvas = await html2canvas(grid);
+  const link = document.createElement("a");
+  link.download = "bingo-board.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+});

@@ -48,16 +48,31 @@ button {
 }
 
 .cell {
+  position: relative;
   border: 1px solid #ccc;
-  padding: 1rem;
-  min-height: 80px;
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cell.free {
+  background: #eee;
+  font-weight: bold;
 }
 
 .free {
   background: #eee;
   font-weight: bold;
+}
+
+.cell.marked::after {
+  content: "✕";
+  position: absolute;
+  font-size: 4rem;
+  color: rgba(0, 0, 0, 0.6);
 }
