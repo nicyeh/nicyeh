@@ -2,6 +2,7 @@ const inputsContainer = document.querySelector(".inputs");
 const form = document.getElementById("bingo-form");
 const boardSection = document.getElementById("board");
 const grid = document.querySelector(".grid");
+let boardState = [];
 
 // generate 24 inputs
 for (let i = 0; i < 24; i++) {
@@ -71,7 +72,7 @@ saveButton.addEventListener("click", async () => {
 
   // Then, generate and navigate to the unique URL
   const encoded = btoa(JSON.stringify(boardState));
-  const newUrl = `${window.location.origin}/bingo?board=${encoded}`;
+  const newUrl = `${window.location.pathname}?board=${encoded}`;
   window.location.href = newUrl;
 });
 
@@ -130,3 +131,6 @@ function loadBoardFromURL() {
     console.error("Invalid board data");
   }
 }
+
+// Load board if URL contains data when the script runs
+loadBoardFromURL();
