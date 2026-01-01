@@ -1,34 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2026 Bingo</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
 
-  <body>
-    <main>
-      <h1>2026 Bingo</h1>
-      <p>Enter 24 goals. Then generate your board.</p>
+<head>
 
+  <!--  Basic metadata  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- title  -->
+  <title>bingo board maker — nicyeh</title>
+
+  <!-- Link to your CSS file (layout, fonts, colors)  -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Library that lets us convert HTML → PNG; Used when saving the bingo board as an image  -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+</head>
+
+
+<body>
+
+  <!-- MAIN PAGE CONTAINER;
+   Keeps content centered and readable  -->
+  <main>
+
+    <!--  HEADER / INTRO
+      Shown on both the input page and shared page  -->
+    <header>
+      <h1>bingo board maker</h1>
+      <p>select some categories and fill in your goals!</p>
+    </header>
+
+    <!-- INPUT SECTION;
+     users enter prompts and section is hidden when loading shared board link -->
+    <section id="input-section">
+      <h2>enter your prompts</h2>
+
+      <!-- FORM
+       holds the 24 text inputs; we do NOT submit this to a server & JS intercepts everything -->
       <form id="bingo-form">
-        <div class="inputs">
-          <!-- JS will generate 24 inputs -->
-        </div>
 
-        <button type="submit">Generate Board</button>
+        <!-- Container for the inputs
+          JS will generate 24 inputs dynamically -->
+        <div id="inputs"></div>
+
+        <!-- 
+          Button to generate the bingo board
+        -->
+        <button type="submit">generate board!</button>
       </form>
+    </section>
 
-      <section id="board" class="hidden">
-        <h2>Your Bingo Board</h2>
-        <div class="grid"></div>
-      </section>
-    </main>
+    <!-- 
+      BOARD SECTION
+      Hidden by default
+      Shown after board is generated OR loaded from URL
+    -->
+    <section id="board-section" class="hidden">
+      <h2>your board</h2>
 
-<button id="save-board">Save Board</button>
-    
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script src="script.js"></script>
-  </body>
+      <!-- 
+        5x5 Bingo Grid
+        JS inserts 25 cells here
+      -->
+      <div id="grid" class="grid"></div>
+
+      <!-- 
+        Save Board Button
+        - downloads PNG
+        - redirects to unique URL
+      -->
+      <button id="save-board">save board</button>
+    </section>
+
+    <!-- 
+      FOOTER
+      Simple branding / credit
+    -->
+    <footer>
+      <p>made by nicyeh</p>
+    </footer>
+
+  </main>
+
+  <!-- 
+    MAIN JAVASCRIPT FILE
+    Handles:
+    - input validation
+    - board generation
+    - click-to-X
+    - URL encoding
+    - loading shared boards
+  -->
+  <script src="script.js"></script>
+
+</body>
 </html>
